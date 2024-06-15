@@ -31,6 +31,7 @@ def Llama_generate(text, max_new_tokens=100, temperature=0.7, top_k=50, top_p=0.
             temperature=temperature,
             top_k=top_k,
             top_p=top_p,
+            eos_token_id=Llama_tokenizer.eos_token_id,
             early_stopping=True
         )
         response = Llama_tokenizer.decode(outputs[0], skip_special_tokens=True)
