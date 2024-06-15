@@ -22,9 +22,16 @@ def T5_generate(text):
 def get_difference(input ,response):
     return response[len(input)-1:]
 
-def Llama_generate(text):
+def Llama_generate(text, max_new_tokens=100, temperature=0.7, top_k=50, top_p=0.9):
     with torch.no_grad():
         inputs = Llama_tokenizer(text, return_tensors="pt").to(device)
-        outputs = Llama_model.generate(**inputs, max_new_tokens=100, temperature = 0.001, early_stopping = True)
+        outputs = Llama_model.generate(
+            **inputs,
+            max_new_tokens=max_new_tokens,
+            temperature=temperature,
+            top_k=top_k,
+            top_p=top_p,
+            early_stopping=True
+        )
         response = Llama_tokenizer.decode(outputs[0], skip_special_tokens=True)
     return get_difference(text, response)
