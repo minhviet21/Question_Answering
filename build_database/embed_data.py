@@ -5,8 +5,8 @@ import weaviate
 
 model = SentenceTransformer('bkai-foundation-models/vietnamese-bi-encoder')
 
-input_file = "Question_Ansering\\sample_data\\fine_legal_corpus.csv"
-output_json_file = "Question_Ansering\\sample_data\\fine_legal_corpus_vector.json"
+input_file = "sample_data/fine_legal_corpus.csv"
+output_json_file = "sample_data/fine_legal_corpus_vector.json"
 
 def text2vec(text):
   return str(model.encode(text).tolist())
