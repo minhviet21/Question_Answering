@@ -20,7 +20,7 @@ def translate_vi2en(text):
     return tokenizer_vi2en.batch_decode(output_ids, skip_special_tokens=True)[0]
 
 def translate_en2vi(text):
-    input_ids = tokenizer_en2vi(response, padding=True, return_tensors="pt")
+    input_ids = tokenizer_en2vi(text, padding=True, return_tensors="pt")
     output_ids = model_en2vi.generate(
         **input_ids,
         decoder_start_token_id=tokenizer_en2vi.lang_code_to_id["vi_VN"],
