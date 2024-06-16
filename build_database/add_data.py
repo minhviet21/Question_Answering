@@ -10,7 +10,7 @@ client = weaviate.Client(
 class_obj = {"class": "test2", "vectorizer": None,}
 client.schema.create_class(class_obj)
 
-with open('Question_Ansering\sample_data\legal_corpus.json', 'r', encoding = "utf-8") as file:
+with open('Question_Ansering\\sample_data\\fine_legal_corpus_vector.json', 'r', encoding = "utf-8") as file:
     data = json.load(file)
 
 client.batch.configure(batch_size=100)
