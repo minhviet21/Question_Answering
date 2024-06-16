@@ -13,7 +13,10 @@ def vector_search(vector):
 
 def BM25_search(query):
     result = client.query.get("test1", ["law_id","article_id","title", "index", "content"]
-                        ).with_text(query).with_limit(1).with_additional(['certainty']).do()
+                        ).with_bm25(
+                          query=question,
+                          properties=["content"]
+                        ).with_limit(1).with_additional(['certainty']).do()
     return result['data']['Get']['Test1'][0]['content']
 
 def hybrid_search(query, vector):
