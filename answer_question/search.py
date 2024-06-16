@@ -11,7 +11,7 @@ def vector_search(vector):
                         ).with_near_vector(nearVector).with_limit(1).with_additional(['certainty']).do()
     return result['data']['Get']['Test1'][0]['content']
 
-def BM25_search(query):
+def BM25_search(question):
     result = client.query.get("test1", ["law_id","article_id","title", "index", "content"]
                         ).with_bm25(
                           query=question,
@@ -19,16 +19,7 @@ def BM25_search(query):
                         ).with_limit(1).with_additional(['certainty']).do()
     return result['data']['Get']['Test1'][0]['content']
 
-def hybrid_search(query, vector):
-    result = client.query.get("test1", ["law_id","article_id","title", "index", "content"]
-                          ).with_hybrid(
-                              query=query,
-                              properties=["content"], 
-                              vector = vector 
-                              ).with_limit(1).with_additional(['certainty']).do()
-    return result['data']['Get']['Test1'][0]['content']
-
-def vector_to_BM25_search(vector, question, k):
+def vector_to_BM25_search(question, vector, k):
     nearVector = {"vector": vector}
     top_results = client.query.get("test1", ["law_id", "article_id", "title", "index", "content", "_additional { id }"]
                         ).with_near_vector(nearVector).with_limit(k).with_additional(['certainty']).do()
@@ -47,7 +38,7 @@ def vector_to_BM25_search(vector, question, k):
     
     return result['data']['Get']['Test1'][0]['content']
 
-def BM25_to_vector_search(vector, question, k):
+def BM25_to_vector_search(question, vector, k):
     top_results = client.query.get("test1", ["law_id", "article_id", "title", "index", "content", "_additional { id }"]
                         ).with_bm25(
                           query=question,
