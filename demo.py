@@ -25,7 +25,7 @@ if confirm_button and question:
 if st.session_state.submitted_question:
     vi_question = st.session_state.submitted_question
     vector = embed_question(vi_question)
-    vi_context = vector_to_BM25_search(vi_question, vector, 20)
+    vi_context = vector_to_BM25_search(vi_question, vector, 30)
     en_question = translate_vi2en(vi_question)
     en_context = translate_vi2en(vi_context)
     en_response = generate(en_question, en_context)
