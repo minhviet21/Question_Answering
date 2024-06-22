@@ -21,7 +21,7 @@ CONTEXT: {context}
 
 QUESTION: {question}
 """
-    input_ids = tokenizer(prompt, return_tensors="pt").input_ids
+    input_ids = tokenizer(prompt, return_tensors="pt").input_ids.to(device)
     outputs = model.generate(input_ids, max_new_tokens=200)
     response = tokenizer.decode(outputs[0],skip_special_tokens=True)
     return get_answer(response)
