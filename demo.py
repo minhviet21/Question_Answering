@@ -13,18 +13,16 @@ st.markdown("""
 
 st.markdown("<h1 class='center-text'>Hỏi đáp hình phạt trong pháp luật Việt Nam</h1>", unsafe_allow_html=True)
 
-question = st.text_input("Nhập câu hỏi")
-
-confirm_button = st.button("Xác nhận")
-
 if 'submitted_question' not in st.session_state:
-    st.session_state.submitted_question = None
+    st.session_state.submitted_question = ''
+
+question = st.text_area("Nhập câu hỏi", st.session_state.submitted_question, height = 50)
+confirm_button = st.button("Xác nhận")
 
 if confirm_button and question:
     st.session_state.submitted_question = question
 
 if st.session_state.submitted_question:
-    st.write("Câu trả lời cho câu hỏi của bạn:")
     vi_question = st.session_state.submitted_question
     vector = embed_question(vi_question)
     vi_context = vector_to_BM25_search(vi_question, vector, 20)
@@ -32,4 +30,4 @@ if st.session_state.submitted_question:
     en_context = translate_vi2en(vi_context)
     en_response = generate(en_question, en_context)
     vi_response = translate_en2vi(en_response)
-    st.code(vi_response)
+    st.text_area("Câu trả lời cho câu hỏi của bạn:",vi_response,height = 100)
