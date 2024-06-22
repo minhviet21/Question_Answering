@@ -17,9 +17,9 @@ def get_answer(response):
 
 def generate(question, context):
     prompt = f"""
-CONTEXT: {en_context}
+CONTEXT: {context}
 
-QUESTION: {en_question}
+QUESTION: {question}
 """
     input_ids = tokenizer(prompt, return_tensors="pt").input_ids
     outputs = model.generate(input_ids, max_new_tokens=200)
