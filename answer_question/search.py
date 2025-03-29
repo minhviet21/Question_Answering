@@ -2,7 +2,7 @@ import weaviate
 
 client = weaviate.Client(
     url = "https://project2-f1prkf5g.weaviate.network",  # Replace with your Weaviate endpoint
-    auth_client_secret=weaviate.auth.AuthApiKey(api_key="OdVkRlISRMtBNYgd1FZFWCMCm3SuuBstNtbZ"),  # Replace with your Weaviate instance API key
+    auth_client_secret=weaviate.auth.AuthApiKey(api_key=""),  # Replace with your Weaviate instance API key
 )
 
 def vector_search(vector):
